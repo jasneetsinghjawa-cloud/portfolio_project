@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jasneet Singh Jawa — Developer Portfolio" />
+  <title>Jasneet Singh Jawa | Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===================================================================
+       CUSTOM PROPERTIES — Warm, bright, nature-inspired palette
+       =================================================================== */
+    :root {
+      --bg:            #faf7f2;
+      --bg-warm:       #fff8f0;
+      --bg-card:       #ffffff;
+      --bg-glass:      rgba(255,255,255,.65);
+      --border:        rgba(0,0,0,.06);
+
+      --text:          #2d2a26;
+      --text-soft:     #5c564e;
+      --text-muted:    #9b9389;
+
+      /* Nature accent palette */
+      --coral:         #f47c6e;
+      --coral-light:   #ffa498;
+      --sunset:        #f6a04a;
+      --teal:          #3db8a0;
+      --teal-light:    #7dd8c4;
+      --sky:           #5da3e8;
+      --lavender:      #a78bfa;
+      --leaf:          #7cc474;
+
+      --gradient-hero:  linear-gradient(135deg, #f47c6e 0%, #f6a04a 50%, #5da3e8 100%);
+      --gradient-warm:  linear-gradient(135deg, #f47c6e, #f6a04a);
+      --gradient-cool:  linear-gradient(135deg, #3db8a0, #5da3e8);
+      --gradient-fun:   linear-gradient(135deg, #a78bfa, #f47c6e);
+
+      --font:          'Poppins', system-ui, sans-serif;
+      --font-mono:     'Fira Code', monospace;
+      --radius:        1rem;
+      --radius-lg:     1.5rem;
+      --radius-xl:     2rem;
+      --shadow:        0 4px 24px rgba(0,0,0,.06);
+      --shadow-lg:     0 12px 40px rgba(0,0,0,.1);
+      --transition:    .4s cubic-bezier(.4,0,.2,1);
+      --section-py:    clamp(5rem, 10vw, 8rem);
+    }
+
+    /* ===================================================================
+       RESET & BASE
+       =================================================================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 5rem;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    ::selection {
+      background: var(--coral);
+      color: #fff;
+    }
+
+    .container {
+      width: min(72rem, 90vw);
+      margin-inline: auto;
+    }
+
+    /* ===================================================================
+       FLOATING NATURE ELEMENTS — leaves, dots, organic blobs
+       =================================================================== */
+    .nature-float {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      font-size: 2rem;
+      opacity: .18;
+    }
+    .nature-float:nth-child(1) { top: 12%; left: 5%;  animation: drift1 20s ease-in-out infinite; }
+    .nature-float:nth-child(2) { top: 30%; right: 8%; animation: drift2 25s ease-in-out infinite; }
+    .nature-float:nth-child(3) { top: 55%; left: 10%; animation: drift3 22s ease-in-out infinite; }
+    .nature-float:nth-child(4) { top: 75%; right: 5%; animation: drift1 18s ease-in-out infinite reverse; }
+    .nature-float:nth-child(5) { top: 90%; left: 15%; animation: drift2 24s ease-in-out infinite reverse; }
+    .nature-float:nth-child(6) { top: 8%;  right: 20%;animation: drift3 28s ease-in-out infinite; }
+
+    @keyframes drift1 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25%  { transform: translate(30px, -20px) rotate(15deg); }
+      50%  { transform: translate(-15px, 25px) rotate(-10deg); }
+      75%  { transform: translate(20px, 15px) rotate(8deg); }
+    }
+    @keyframes drift2 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33%  { transform: translate(-25px, 30px) rotate(-12deg); }
+      66%  { transform: translate(20px, -15px) rotate(18deg); }
+    }
+    @keyframes drift3 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      50%  { transform: translate(15px, -30px) rotate(20deg) scale(1.1); }
+    }
+
+    /* Organic background blobs */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob--1 {
+      width: 30rem; height: 30rem;
+      background: var(--coral-light);
+      opacity: .12;
+      top: -10rem; right: -10rem;
+      animation: blobPulse 15s ease-in-out infinite alternate;
+    }
+    .blob--2 {
+      width: 25rem; height: 25rem;
+      background: var(--teal-light);
+      opacity: .1;
+      bottom: 5%; left: -8rem;
+      animation: blobPulse 20s ease-in-out infinite alternate-reverse;
+    }
+    .blob--3 {
+      width: 20rem; height: 20rem;
+      background: var(--lavender);
+      opacity: .08;
+      top: 40%; right: 10%;
+      animation: blobPulse 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes blobPulse {
+      0%   { transform: scale(1) translate(0, 0); }
+      100% { transform: scale(1.15) translate(2rem, -1.5rem); }
+    }
+
+    /* ===================================================================
+       REVEAL ON SCROLL
+       =================================================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(2.5rem);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-3rem);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(3rem);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(.85);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Stagger */
+    [data-delay="1"] { transition-delay: .1s; }
+    [data-delay="2"] { transition-delay: .2s; }
+    [data-delay="3"] { transition-delay: .3s; }
+    [data-delay="4"] { transition-delay: .4s; }
+    [data-delay="5"] { transition-delay: .5s; }
+
+    /* ===================================================================
+       SECTION HEADINGS
+       =================================================================== */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .4rem 1rem;
+      border-radius: 2rem;
+      margin-bottom: 1rem;
+    }
+    .section-tag--coral   { background: #fef0ee; color: var(--coral); }
+    .section-tag--teal    { background: #edf9f5; color: var(--teal); }
+    .section-tag--sky     { background: #eef5fc; color: var(--sky); }
+    .section-tag--sunset  { background: #fef5eb; color: var(--sunset); }
+    .section-tag--lavender{ background: #f3efff; color: var(--lavender); }
+    .section-tag--leaf    { background: #eef8ed; color: var(--leaf); }
+
+    .section-title {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.15;
+      margin-bottom: .5rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-soft);
+      font-size: 1.05rem;
+      max-width: 34rem;
+    }
+
+    .gradient-text {
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ===================================================================
+       NAVBAR
+       =================================================================== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px) saturate(1.6);
+      -webkit-backdrop-filter: blur(16px) saturate(1.6);
+      background: var(--bg-glass);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow var(--transition);
+    }
+    .nav.scrolled {
+      box-shadow: var(--shadow);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.25rem;
+    }
+
+    .nav__logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -.02em;
+      background: var(--gradient-warm);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav__links { display: flex; gap: 2rem; }
+    .nav__links a {
+      font-size: .88rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      position: relative;
+      transition: color var(--transition);
+    }
+    .nav__links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px; left: 0;
+      width: 0; height: 3px;
+      border-radius: 2px;
+      background: var(--gradient-warm);
+      transition: width var(--transition);
+    }
+    .nav__links a:hover { color: var(--coral); }
+    .nav__links a:hover::after { width: 100%; }
+
+    .nav__toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none; border: none;
+      cursor: pointer;
+    }
+    .nav__toggle span {
+      width: 24px; height: 2.5px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ===================================================================
+       HERO
+       =================================================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 4.25rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__content { max-width: 46rem; }
+
+    /* Waving hand animation */
+    .hero__wave {
+      display: inline-block;
+      font-size: 2.2rem;
+      animation: wave 2.5s ease-in-out infinite;
+      transform-origin: 70% 70%;
+    }
+    @keyframes wave {
+      0%   { transform: rotate(0deg); }
+      10%  { transform: rotate(14deg); }
+      20%  { transform: rotate(-8deg); }
+      30%  { transform: rotate(14deg); }
+      40%  { transform: rotate(-4deg); }
+      50%  { transform: rotate(10deg); }
+      60%  { transform: rotate(0deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .hero__greeting {
+      font-size: 1.15rem;
+      color: var(--text-soft);
+      margin-bottom: .75rem;
+      opacity: 0;
+      animation: fadeUp .8s .2s forwards;
+    }
+
+    .hero__name {
+      font-size: clamp(2.8rem, 7vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp .8s .4s forwards;
+    }
+
+    /* Typewriter for tagline */
+    .hero__tagline {
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+      color: var(--text-soft);
+      margin-bottom: .5rem;
+      opacity: 0;
+      animation: fadeUp .8s .6s forwards;
+    }
+
+    .hero__typed {
+      display: inline;
+      font-weight: 600;
+      color: var(--coral);
+      border-right: 2.5px solid var(--coral);
+      padding-right: 2px;
+      animation: blink .75s step-end infinite;
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .hero__sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp .8s .8s forwards;
+    }
+
+    .hero__cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp .8s 1s forwards;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .85rem 2rem;
+      border-radius: 3rem;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-family: var(--font);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn--coral {
+      background: var(--gradient-warm);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(244,124,110,.3);
+    }
+    .btn--coral:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(244,124,110,.45);
+    }
+    .btn--coral::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.25), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .btn--coral:hover::after { opacity: 1; }
+
+    .btn--outline {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .btn--outline:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(2rem); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero illustration — nature scene with CSS */
+    .hero__art {
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 22rem;
+      height: 22rem;
+      opacity: 0;
+      animation: fadeUp 1s 1.2s forwards;
+    }
+
+    .hero__art-circle {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fef0ee 0%, #edf9f5 50%, #eef5fc 100%);
+      position: relative;
+      overflow: hidden;
+      animation: breathe 6s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.03); }
+    }
+
+    /* Mini elements inside the hero circle */
+    .hero__art-sun {
+      position: absolute;
+      top: 15%; right: 18%;
+      width: 3.5rem; height: 3.5rem;
+      background: var(--sunset);
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(246,160,74,.4);
+      animation: glow 4s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      0%   { box-shadow: 0 0 20px rgba(246,160,74,.3); }
+      100% { box-shadow: 0 0 40px rgba(246,160,74,.6); }
+    }
+
+    .hero__art-mountain {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 55%;
+    }
+    .hero__art-mountain::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 10%;
+      border-left: 5rem solid transparent;
+      border-right: 5rem solid transparent;
+      border-bottom: 8rem solid var(--teal);
+      opacity: .7;
+    }
+    .hero__art-mountain::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 35%;
+      border-left: 6rem solid transparent;
+      border-right: 6rem solid transparent;
+      border-bottom: 10rem solid var(--teal-light);
+      opacity: .5;
+    }
+
+    .hero__art-cloud {
+      position: absolute;
+      background: rgba(255,255,255,.8);
+      border-radius: 2rem;
+      animation: cloudDrift 12s ease-in-out infinite;
+    }
+    .hero__art-cloud--1 {
+      width: 5rem; height: 1.8rem;
+      top: 22%; left: 10%;
+    }
+    .hero__art-cloud--2 {
+      width: 3.5rem; height: 1.3rem;
+      top: 35%; left: 55%;
+      animation-delay: -4s;
+      animation-duration: 16s;
+    }
+
+    @keyframes cloudDrift {
+      0%, 100% { transform: translateX(0); }
+      50%      { transform: translateX(1.5rem); }
+    }
+
+    .hero__art-bird {
+      position: absolute;
+      top: 28%; left: 30%;
+      font-size: 1.2rem;
+      animation: birdFly 8s ease-in-out infinite;
+    }
+    @keyframes birdFly {
+      0%, 100% { transform: translate(0, 0) scaleX(1); }
+      25%  { transform: translate(2rem, -.8rem) scaleX(1); }
+      50%  { transform: translate(4rem, .3rem) scaleX(-1); }
+      75%  { transform: translate(1rem, -.5rem) scaleX(-1); }
+    }
+
+    /* ===================================================================
+       WAVE DIVIDER
+       =================================================================== */
+    .wave-divider {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .wave-divider svg {
+      width: 100%;
+      height: 80px;
+      display: block;
+    }
+    .wave-divider--flip { transform: rotate(180deg); }
+
+    /* ===================================================================
+       ABOUT
+       =================================================================== */
+    .about {
+      padding: var(--section-py) 0;
+      background: var(--bg-warm);
+      position: relative;
+      z-index: 1;
+    }
+
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .about__avatar {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .about__avatar-shape {
+      width: 18rem; height: 18rem;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      background: linear-gradient(135deg, #fef0ee, #edf9f5, #eef5fc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      animation: morphShape 10s ease-in-out infinite;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    @keyframes morphShape {
+      0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+      25%  { border-radius: 58% 42% 38% 62% / 50% 58% 42% 50%; }
+      50%  { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+      75%  { border-radius: 33% 67% 58% 42% / 63% 38% 62% 37%; }
+    }
+
+    /* Floating emojis around avatar */
+    .about__float-emoji {
+      position: absolute;
+      font-size: 1.6rem;
+      animation: orbitEmoji 8s linear infinite;
+    }
+    .about__float-emoji:nth-child(2) { animation-delay: -2s; top: 0; right: 10%; }
+    .about__float-emoji:nth-child(3) { animation-delay: -4s; bottom: 5%; left: 5%; }
+    .about__float-emoji:nth-child(4) { animation-delay: -6s; top: 20%; left: 0; }
+
+    @keyframes orbitEmoji {
+      0%, 100% { transform: translateY(0) scale(1); opacity: .7; }
+      50%      { transform: translateY(-12px) scale(1.15); opacity: 1; }
+    }
+
+    .about__text p {
+      color: var(--text-soft);
+      margin-bottom: 1.25rem;
+      font-size: 1.02rem;
+    }
+    .about__text strong {
+      color: var(--text);
+    }
+
+    .about__highlights {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .highlight-card {
+      padding: 1.25rem;
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: center;
+    }
+    .highlight-card:hover {
+      transform: translateY(-4px) rotate(-1deg);
+      box-shadow: var(--shadow-lg);
+    }
+    .highlight-card__icon { font-size: 1.8rem; margin-bottom: .4rem; }
+    .highlight-card__value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: var(--gradient-warm);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .highlight-card__label {
+      font-size: .78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    /* ===================================================================
+       SKILLS
+       =================================================================== */
+    .skills {
+      padding: var(--section-py) 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .skills__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      cursor: default;
+    }
+    .skill-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Colored top stripe */
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 4px 4px 0 0;
+    }
+    .skill-card:nth-child(1)::before { background: var(--gradient-warm); }
+    .skill-card:nth-child(2)::before { background: var(--gradient-cool); }
+    .skill-card:nth-child(3)::before { background: var(--gradient-fun); }
+    .skill-card:nth-child(4)::before { background: linear-gradient(135deg, var(--sunset), var(--leaf)); }
+    .skill-card:nth-child(5)::before { background: linear-gradient(135deg, var(--sky), var(--lavender)); }
+
+    .skill-card__emoji {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      transition: transform .5s ease;
+    }
+    .skill-card:hover .skill-card__emoji {
+      transform: scale(1.25) rotate(-8deg);
+      animation: bounce .5s;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: scale(1.25) rotate(-8deg) translateY(0); }
+      50%      { transform: scale(1.25) rotate(-8deg) translateY(-8px); }
+    }
+
+    .skill-card__name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: .35rem;
+    }
+
+    .skill-card__desc {
+      font-size: .85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Animated progress bar */
+    .skill-bar {
+      height: 6px;
+      background: #f0ede8;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .skill-bar__fill {
+      height: 100%;
+      border-radius: 3px;
+      width: 0;
+      transition: width 1.5s .3s cubic-bezier(.4,0,.2,1);
+    }
+    .skill-card.visible .skill-bar__fill { width: var(--w); }
+
+    .skill-card:nth-child(1) .skill-bar__fill { background: var(--gradient-warm); }
+    .skill-card:nth-child(2) .skill-bar__fill { background: var(--gradient-cool); }
+    .skill-card:nth-child(3) .skill-bar__fill { background: var(--gradient-fun); }
+    .skill-card:nth-child(4) .skill-bar__fill { background: linear-gradient(135deg, var(--sunset), var(--leaf)); }
+    .skill-card:nth-child(5) .skill-bar__fill { background: linear-gradient(135deg, var(--sky), var(--lavender)); }
+
+    /* ===================================================================
+       EDUCATION
+       =================================================================== */
+    .education {
+      padding: var(--section-py) 0;
+      background: var(--bg-warm);
+      position: relative;
+      z-index: 1;
+    }
+
+    .education__card {
+      margin-top: 3rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .education__card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .education__card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 5px;
+      background: var(--gradient-cool);
+      border-radius: 5px 0 0 5px;
+    }
+
+    .education__icon {
+      flex-shrink: 0;
+      width: 5rem; height: 5rem;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #edf9f5, #eef5fc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+    .education__date {
+      font-family: var(--font-mono);
+      font-size: .82rem;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: .4rem;
+    }
+
+    .education__title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: .25rem;
+    }
+
+    .education__sub {
+      color: var(--text-soft);
+      font-size: 1rem;
+      margin-bottom: .75rem;
+    }
+
+    .education__desc {
+      color: var(--text-muted);
+      font-size: .92rem;
+    }
+
+    /* ===================================================================
+       HOBBIES
+       =================================================================== */
+    .hobbies {
+      padding: var(--section-py) 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hobbies__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .hobby-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 3rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .hobby-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Subtle gradient bg on hover */
+    .hobby-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity .5s;
+    }
+    .hobby-card:nth-child(1)::after {
+      background: linear-gradient(135deg, rgba(244,124,110,.06), rgba(246,160,74,.06));
+    }
+    .hobby-card:nth-child(2)::after {
+      background: linear-gradient(135deg, rgba(61,184,160,.06), rgba(93,163,232,.06));
+    }
+    .hobby-card:hover::after { opacity: 1; }
+
+    .hobby-card__emoji {
+      font-size: 3.5rem;
+      margin-bottom: 1.25rem;
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+      animation: floatHobby 4s ease-in-out infinite;
+    }
+    .hobby-card:nth-child(2) .hobby-card__emoji { animation-delay: -2s; }
+
+    @keyframes floatHobby {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-.75rem) rotate(3deg); }
+    }
+
+    .hobby-card__title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hobby-card__desc {
+      color: var(--text-muted);
+      font-size: .92rem;
+      position: relative;
+      z-index: 1;
+      line-height: 1.6;
+    }
+
+    /* ===================================================================
+       CONTACT
+       =================================================================== */
+    .contact {
+      padding: var(--section-py) 0;
+      background: var(--bg-warm);
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact__wrapper {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact__text h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: .75rem;
+    }
+    .contact__text p {
+      color: var(--text-soft);
+      margin-bottom: 2rem;
+    }
+
+    .contact__links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.5rem;
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .contact-link:hover {
+      transform: translateX(.75rem) translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact-link__icon {
+      width: 2.8rem; height: 2.8rem;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+    .contact-link--gh .contact-link__icon  { background: #f0ede8; }
+    .contact-link--li .contact-link__icon  { background: #eef5fc; }
+    .contact-link--em .contact-link__icon  { background: #fef0ee; }
+
+    .contact-link:hover .contact-link__icon { transform: rotate(-8deg) scale(1.1); }
+
+    .contact-link__label {
+      font-size: .72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .contact-link__value {
+      font-weight: 600;
+      font-size: .95rem;
+    }
+
+    /* Decorative illustration */
+    .contact__art {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact__art-scene {
+      position: relative;
+      width: 16rem; height: 16rem;
+    }
+    .contact__art-tree {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      font-size: 6rem;
+      animation: sway 5s ease-in-out infinite;
+    }
+    @keyframes sway {
+      0%, 100% { transform: translateX(-50%) rotate(0deg); }
+      50%      { transform: translateX(-50%) rotate(3deg); }
+    }
+    .contact__art-ground {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3rem;
+      background: linear-gradient(to top, #edf9f5, transparent);
+      border-radius: 50%;
+    }
+    .contact__art-butterfly {
+      position: absolute;
+      top: 15%; right: 10%;
+      font-size: 1.5rem;
+      animation: butterfly 6s ease-in-out infinite;
+    }
+    @keyframes butterfly {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25%  { transform: translate(-1rem, -.5rem) rotate(-10deg); }
+      50%  { transform: translate(.5rem, -1rem) rotate(5deg); }
+      75%  { transform: translate(-1.5rem, .5rem) rotate(-5deg); }
+    }
+    .contact__art-flower1 {
+      position: absolute;
+      bottom: 1.5rem; left: 15%;
+      font-size: 1.8rem;
+      animation: floatHobby 4s ease-in-out infinite;
+    }
+    .contact__art-flower2 {
+      position: absolute;
+      bottom: 1.5rem; right: 15%;
+      font-size: 1.5rem;
+      animation: floatHobby 5s ease-in-out infinite reverse;
+    }
+
+    /* ===================================================================
+       FOOTER
+       =================================================================== */
+    .footer {
+      padding: 2.5rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: .88rem;
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+    }
+    .footer__heart {
+      color: var(--coral);
+      display: inline-block;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15%      { transform: scale(1.2); }
+      30%      { transform: scale(1); }
+      45%      { transform: scale(1.15); }
+      60%      { transform: scale(1); }
+    }
+    .footer strong {
+      background: var(--gradient-warm);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ===================================================================
+       RESPONSIVE
+       =================================================================== */
+    @media (max-width: 64rem) {
+      .hero__art { display: none; }
+      .about__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about__avatar { order: -1; }
+      .contact__wrapper { grid-template-columns: 1fr; }
+      .contact__art { display: none; }
+    }
+
+    @media (max-width: 48rem) {
+      .nav__links { display: none; }
+      .nav__toggle { display: flex; }
+
+      .nav__links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 4.25rem; left: 0; right: 0;
+        background: var(--bg-glass);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem 2rem;
+        gap: 1.25rem;
+        animation: fadeUp .35s;
+      }
+
+      .hero__name { font-size: 2.4rem; }
+      .about__highlights { grid-template-columns: 1fr 1fr; }
+      .about__avatar-shape { width: 14rem; height: 14rem; font-size: 4.5rem; }
+      .education__card { flex-direction: column; text-align: center; padding: 2rem; }
+    }
+
+    @media (max-width: 30rem) {
+      .about__highlights { grid-template-columns: 1fr; }
+    }
+
+    /* ===================================================================
+       SCROLLBAR
+       =================================================================== */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--coral-light), var(--teal-light));
+      border-radius: 4px;
+    }
+
+    /* ===================================================================
+       REDUCED MOTION
+       =================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal, .reveal-left, .reveal-right, .reveal-scale {
+        opacity: 1; transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ======================== FLOATING NATURE ELEMENTS =============== -->
+  <div class="nature-float" aria-hidden="true">🍃</div>
+  <div class="nature-float" aria-hidden="true">🌿</div>
+  <div class="nature-float" aria-hidden="true">✨</div>
+  <div class="nature-float" aria-hidden="true">🍂</div>
+  <div class="nature-float" aria-hidden="true">🌸</div>
+  <div class="nature-float" aria-hidden="true">🦋</div>
+
+  <!-- Background blobs -->
+  <div class="blob blob--1" aria-hidden="true"></div>
+  <div class="blob blob--2" aria-hidden="true"></div>
+  <div class="blob blob--3" aria-hidden="true"></div>
+
+  <!-- ======================== NAVIGATION =========================== -->
+  <nav class="nav" id="navbar" role="navigation" aria-label="Primary">
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo">Jasneet ✦</a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#hobbies">Hobbies</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ======================== HERO ================================= -->
+  <header class="hero" id="hero">
+    <div class="container hero__content">
+      <p class="hero__greeting"><span class="hero__wave">👋</span> Hey there, I'm</p>
+      <h1 class="hero__name"><span class="gradient-text">Jasneet Singh Jawa</span></h1>
+      <p class="hero__tagline">
+        I'm a <span class="hero__typed" id="typed"></span>
+      </p>
+      <p class="hero__sub">
+        First-year CS student at Newton School of Technology · Turning caffeine into code ☕
+      </p>
+      <div class="hero__cta">
+        <a href="#contact" class="btn btn--coral">
+          Say Hello 💬
+        </a>
+        <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--outline">
+          🐙 GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero nature art -->
+    <div class="hero__art" aria-hidden="true">
+      <div class="hero__art-circle">
+        <div class="hero__art-sun"></div>
+        <div class="hero__art-cloud hero__art-cloud--1"></div>
+        <div class="hero__art-cloud hero__art-cloud--2"></div>
+        <span class="hero__art-bird">🕊️</span>
+        <div class="hero__art-mountain"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Wave divider -->
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+      <path d="M0,40 C300,80 600,0 900,40 C1050,60 1150,30 1200,40 L1200,80 L0,80 Z" fill="#fff8f0"/>
+    </svg>
+  </div>
+
+  <!-- ======================== ABOUT ================================ -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-tag section-tag--coral">🌱 About Me</span>
+        <h2 class="section-title">A Little About <span class="gradient-text">Who I Am</span></h2>
+        <p class="section-subtitle">More than just a coder — a curious human exploring life &amp; tech.</p>
+      </div>
+
+      <div class="about__grid">
+        <!-- Avatar -->
+        <div class="about__avatar reveal-left">
+          <div class="about__avatar-shape">👨‍💻</div>
+          <span class="about__float-emoji">🎸</span>
+          <span class="about__float-emoji">⚡</span>
+          <span class="about__float-emoji">🌟</span>
+        </div>
+
+        <!-- Text -->
+        <div class="about__text reveal-right">
+          <p>
+            I'm <strong>Jasneet Singh Jawa</strong>, a first-year student at
+            <strong>Newton School of Technology, Rishihood University</strong>.
+            I believe technology can change the world — and I want to be part of that change. 🌍
+          </p>
+          <p>
+            I love writing clean code, exploring new tools, and understanding
+            how things work under the hood. When I step away from the screen,
+            you'll find me strumming my guitar 🎸 or chasing a ball on the field ⚽.
+            Life is all about balance, right?
+          </p>
+
+          <div class="about__highlights">
+            <div class="highlight-card reveal-scale" data-delay="1">
+              <div class="highlight-card__icon">📚</div>
+              <div class="highlight-card__value">1st Year</div>
+              <div class="highlight-card__label">Student</div>
+            </div>
+            <div class="highlight-card reveal-scale" data-delay="2">
+              <div class="highlight-card__icon">🛠️</div>
+              <div class="highlight-card__value">5+</div>
+              <div class="highlight-card__label">Technologies</div>
+            </div>
+            <div class="highlight-card reveal-scale" data-delay="3">
+              <div class="highlight-card__icon">🔥</div>
+              <div class="highlight-card__value">∞</div>
+              <div class="highlight-card__label">Curiosity</div>
+            </div>
+            <div class="highlight-card reveal-scale" data-delay="4">
+              <div class="highlight-card__icon">💡</div>
+              <div class="highlight-card__value">24/7</div>
+              <div class="highlight-card__label">Learner</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="wave-divider wave-divider--flip" aria-hidden="true">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+      <path d="M0,40 C300,80 600,0 900,40 C1050,60 1150,30 1200,40 L1200,80 L0,80 Z" fill="#fff8f0"/>
+    </svg>
+  </div>
+
+  <!-- ======================== SKILLS =============================== -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-tag section-tag--teal">⚡ Skills</span>
+        <h2 class="section-title">My <span class="gradient-text">Toolbox</span></h2>
+        <p class="section-subtitle">The languages and tools I use to bring ideas to life.</p>
+      </div>
+
+      <div class="skills__grid">
+        <!-- Python -->
+        <div class="skill-card reveal-scale" data-delay="1">
+          <div class="skill-card__emoji">🐍</div>
+          <h3 class="skill-card__name">Python</h3>
+          <p class="skill-card__desc">Scripting, automation &amp; problem solving</p>
+          <div class="skill-bar"><div class="skill-bar__fill" style="--w: 75%"></div></div>
+        </div>
+
+        <!-- HTML -->
+        <div class="skill-card reveal-scale" data-delay="2">
+          <div class="skill-card__emoji">🌐</div>
+          <h3 class="skill-card__name">HTML</h3>
+          <p class="skill-card__desc">Semantic markup &amp; web structure</p>
+          <div class="skill-bar"><div class="skill-bar__fill" style="--w: 80%"></div></div>
+        </div>
+
+        <!-- CLI -->
+        <div class="skill-card reveal-scale" data-delay="3">
+          <div class="skill-card__emoji">💻</div>
+          <h3 class="skill-card__name">CLI</h3>
+          <p class="skill-card__desc">Command-line fluency &amp; shell scripting</p>
+          <div class="skill-bar"><div class="skill-bar__fill" style="--w: 70%"></div></div>
+        </div>
+
+        <!-- Git -->
+        <div class="skill-card reveal-scale" data-delay="4">
+          <div class="skill-card__emoji">🔀</div>
+          <h3 class="skill-card__name">Git</h3>
+          <p class="skill-card__desc">Version control &amp; branching workflows</p>
+          <div class="skill-bar"><div class="skill-bar__fill" style="--w: 72%"></div></div>
+        </div>
+
+        <!-- GitHub -->
+        <div class="skill-card reveal-scale" data-delay="5">
+          <div class="skill-card__emoji">🐙</div>
+          <h3 class="skill-card__name">GitHub</h3>
+          <p class="skill-card__desc">Collaboration, PRs &amp; open source</p>
+          <div class="skill-bar"><div class="skill-bar__fill" style="--w: 74%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+      <path d="M0,40 C200,0 400,80 600,40 C800,0 1000,60 1200,40 L1200,80 L0,80 Z" fill="#fff8f0"/>
+    </svg>
+  </div>
+
+  <!-- ======================== EDUCATION ============================ -->
+  <section class="education" id="education">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-tag section-tag--sky">🎓 Education</span>
+        <h2 class="section-title">Academic <span class="gradient-text">Journey</span></h2>
+        <p class="section-subtitle">Where I'm learning to turn curiosity into capability.</p>
+      </div>
+
+      <div class="education__card reveal">
+        <div class="education__icon">🏫</div>
+        <div>
+          <p class="education__date">2025 — Present</p>
+          <h3 class="education__title">Newton School of Technology</h3>
+          <p class="education__sub">Rishihood University</p>
+          <p class="education__desc">
+            First-year B.Tech student focused on Computer Science — exploring
+            software development fundamentals, data structures, algorithms,
+            and building real-world projects that make a difference. 🚀
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="wave-divider wave-divider--flip" aria-hidden="true">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+      <path d="M0,40 C200,0 400,80 600,40 C800,0 1000,60 1200,40 L1200,80 L0,80 Z" fill="#fff8f0"/>
+    </svg>
+  </div>
+
+  <!-- ======================== HOBBIES ============================== -->
+  <section class="hobbies" id="hobbies">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-tag section-tag--sunset">🌈 Beyond Code</span>
+        <h2 class="section-title">Hobbies &amp; <span class="gradient-text">Interests</span></h2>
+        <p class="section-subtitle">Because life is more than just semicolons and brackets.</p>
+      </div>
+
+      <div class="hobbies__grid">
+        <div class="hobby-card reveal-left" data-delay="1">
+          <div class="hobby-card__emoji">🎸</div>
+          <h3 class="hobby-card__title">Guitar</h3>
+          <p class="hobby-card__desc">
+            Strumming chords and learning new songs keeps me creative
+            and relaxed — music is the perfect counterbalance to code.
+            There's something magical about turning strings into melodies. 🎶
+          </p>
+        </div>
+
+        <div class="hobby-card reveal-right" data-delay="2">
+          <div class="hobby-card__emoji">⚽</div>
+          <h3 class="hobby-card__title">Sports</h3>
+          <p class="hobby-card__desc">
+            Whether it's a quick match on the field or watching a game with
+            friends, sports teach teamwork, discipline, and handling pressure.
+            The field is where I recharge my energy. 💪
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+      <path d="M0,30 C300,70 500,10 700,50 C900,80 1100,20 1200,40 L1200,80 L0,80 Z" fill="#fff8f0"/>
+    </svg>
+  </div>
+
+  <!-- ======================== CONTACT ============================== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-tag section-tag--lavender">💌 Contact</span>
+        <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
+        <p class="section-subtitle">I'd love to hear from you — whether it's about code, music, or just life.</p>
+      </div>
+
+      <div class="contact__wrapper reveal">
+        <div class="contact__text">
+          <h3>Say Hello! 🌻</h3>
+          <p>
+            Got a project idea, a question, or just want to chat?
+            Feel free to reach out — I don't bite (usually). 😄
+          </p>
+
+          <div class="contact__links">
+            <!-- GitHub -->
+            <a href="https://github.com/" target="_blank" rel="noopener" class="contact-link contact-link--gh">
+              <div class="contact-link__icon">🐙</div>
+              <div>
+                <div class="contact-link__label">GitHub</div>
+                <div class="contact-link__value">github.com/your-username</div>
+              </div>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/" target="_blank" rel="noopener" class="contact-link contact-link--li">
+              <div class="contact-link__icon">💼</div>
+              <div>
+                <div class="contact-link__label">LinkedIn</div>
+                <div class="contact-link__value">linkedin.com/in/your-profile</div>
+              </div>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:your.email@example.com" class="contact-link contact-link--em">
+              <div class="contact-link__icon">📧</div>
+              <div>
+                <div class="contact-link__label">Email</div>
+                <div class="contact-link__value">your.email@example.com</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Nature illustration -->
+        <div class="contact__art" aria-hidden="true">
+          <div class="contact__art-scene">
+            <div class="contact__art-ground"></div>
+            <div class="contact__art-tree">🌳</div>
+            <div class="contact__art-butterfly">🦋</div>
+            <div class="contact__art-flower1">🌻</div>
+            <div class="contact__art-flower2">🌷</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER =============================== -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        Made with <span class="footer__heart">❤️</span> by <strong>Jasneet Singh Jawa</strong> · © 2025
+      </p>
+      <p style="margin-top:.4rem; font-size:.8rem;">Keep exploring, keep creating 🌿</p>
+    </div>
+  </footer>
+
+  <!-- ======================== JAVASCRIPT =========================== -->
+  <script>
+    /* ---- Mobile nav toggle ---- */
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', links.classList.contains('open'));
+    });
+    links.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => links.classList.remove('open'))
+    );
+
+    /* ---- Navbar shadow on scroll ---- */
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    /* ---- Typing effect ---- */
+    const phrases = [
+      'Developer 🚀',
+      'Student 📚',
+      'Guitar Player 🎸',
+      'Tech Explorer 🔍',
+      'Sports Lover ⚽',
+      'Quick Learner 💡'
+    ];
+    let phraseIdx = 0, charIdx = 0, deleting = false;
+    const typedEl = document.getElementById('typed');
+
+    function typeWriter() {
+      const current = phrases[phraseIdx];
+      if (deleting) {
+        typedEl.textContent = current.substring(0, charIdx--);
+        if (charIdx < 0) { deleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; }
+        setTimeout(typeWriter, 40);
+      } else {
+        typedEl.textContent = current.substring(0, charIdx++);
+        if (charIdx > current.length) { deleting = true; setTimeout(typeWriter, 1800); return; }
+        setTimeout(typeWriter, 90);
+      }
+    }
+    setTimeout(typeWriter, 1200);
+
+    /* ---- Reveal on scroll (IntersectionObserver) ---- */
+    const revealEls = document.querySelectorAll(
+      '.reveal, .reveal-left, .reveal-right, .reveal-scale, .skill-card'
+    );
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
